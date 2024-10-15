@@ -29,7 +29,7 @@ pd.set_option('display.max_columns', None)
 from mlxtend.frequent_patterns import apriori, association_rules
 
 #########################
-# GÖREV 1: Veriyi Hazırlama
+Veriyi Hazırlama
 #########################
 
 # Adım 1: armut_data.csv dosyasınız okutunuz.
@@ -61,7 +61,7 @@ df[df["UserId"] == 7256 ]
 
 
 #########################
-# GÖREV 2: Birliktelik Kuralları Üretiniz
+Birliktelik Kuralları Üretimi
 #########################
 
 # Adım 1: Aşağıdaki gibi sepet hizmet pivot table’i oluşturunuz.
@@ -78,13 +78,10 @@ invoice_product_df = df.groupby(['SepetID', 'Hizmet'])['Hizmet'].count().unstack
 invoice_product_df.head()
 
 
-# Adım 2: Birliktelik kurallarını oluşturunuz.
+# Adım 2: Birliktelik kurallarını oluşturma
 frequent_itemsets = apriori(invoice_product_df, min_support=0.01, use_colnames=True)
 rules = association_rules(frequent_itemsets, metric="support", min_threshold=0.01)
 rules.head()
-
-
-#Adım 3: arl_recommender fonksiyonunu kullanarak en son 2_0 hizmetini alan bir kullanıcıya hizmet önerisinde bulununuz.
 
 def arl_recommender(rules_df, product_id, rec_count=1):
     sorted_rules = rules_df.sort_values("lift", ascending=False)
